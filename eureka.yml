@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eureka
+  config:
+    import: optional:configserver:http://localhost:8888 
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false  # Do not register itself, since it's a Eureka server
+    fetch-registry: false        # It doesn't need to fetch the registry from others
+  server:
+    wait-time-in-ms-when-sync-empty: 0  # Avoid startup delays
+
