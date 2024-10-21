@@ -2,7 +2,7 @@ spring:
   application:
     name: eureka
   config:
-    import: optional:configserver:http://localhost:7000 
+    import: optional:configserver:http://127.0.0.1:7000 
     
 server:
   port: 8761
@@ -13,4 +13,7 @@ eureka:
     fetch-registry: false        # It doesn't need to fetch the registry from others
   server:
     wait-time-in-ms-when-sync-empty: 0  # Avoid startup delays
+
+
+teste: teste
 
