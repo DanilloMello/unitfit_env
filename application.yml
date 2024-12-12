@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true  # Fail fast if Config Server is not available
+      retry:
+        max-attempts: 5
+        initial-interval: 2000
+      profile: default
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
