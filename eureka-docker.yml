@@ -1,0 +1,7 @@
+teste: teste
+
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://config:8888
