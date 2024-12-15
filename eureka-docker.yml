@@ -2,7 +2,8 @@ server:
   port: 8761
 
 spring:
-  profiles: docker
+  profiles:
+    active: docker 
   cloud:
     config:
       uri: http://config:8888

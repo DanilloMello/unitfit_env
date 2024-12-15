@@ -1,0 +1,64 @@
+spring:
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://database:5432/api
+    username: local
+    password: local
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  docker:
+    compose:
+      skip:
+        in-tests: false
+  graphql:
+    graphiql:
+      enabled: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: unitfit_mobile
+            client-secret: tdihHhhpeRAqO8GtWRN6XjX0iliKXMqz
+            scope: openid, email, profile
+            redirect-uri: http://172.20.99.49:8001/login/oauth2/code/keycloak
+        provider:
+          keycloak:
+            issuer-uri: http://172.20.99.49:8080/realms/unitfit
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.20.99.49:8080/realms/unitfit
+  cloud:
+    gateway:
+        mvc:
+          routes:  
+          - id: resource
+            uri: http://localhost:8001
+            predicates:
+              - Path=/graphql
+            filters:
+              -  TokenRelay=
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/
+
+api:
+  gateway:
+    scale: false
+  services:
+    workout:
+      scale: false
+    stakeholder:
+      scale: false
